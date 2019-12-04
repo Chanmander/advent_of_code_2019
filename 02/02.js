@@ -10,9 +10,10 @@ runIntcode = (input, noun, verb) => {
     if (noun && verb) {
         memory[1] = noun;
         memory[2] = verb;
-        console.log('noun: ' + noun + ' verb: ' + verb);
+        console.log('\n -- NOUN ' + noun + ' VERB ' + verb + ' -- ');
     }
-    console.log('the starting array is ' + input);
+
+    //console.log('the starting array is ' + input);
 
     let instructionStart = 0;
     let optCode = 0;
@@ -71,28 +72,25 @@ doCalc = (optCode, x, y) => {
 };
 
 part1 = (input, noun, verb) => {
-    console.log('-- PART ONE --');
-    let answer = runIntcode(input, noun, verb);
+    console.log('\n-- PART ONE --');
+    let res = runIntcode(input, noun, verb);
+    let answer = res[0];
 
-    console.log('the final array is ' + answer);
-    console.log('the first item is ' + answer[0]);
-    return answer[0];
+    console.log('the final array is ' + res);
+    console.log('the first item is ' + answer);
+    return answer;
 };
 
 part2 = (arr) => {
-    console.log('-- PART TWO --');
+    console.log('\n-- PART TWO --');
     for (let noun = 0; noun <= 99; noun++) {
         for (let verb = 0; verb < 99; verb++) {
             let res = runIntcode(arr, noun, verb);
             if (res[0] === 19690720) {
                 let answer = (100 * noun) + verb;
-                console.log('THIS IS THE ANSWER: ' + answer);
+                console.log('\nTHIS IS THE ANSWER: ' + answer);
                 return answer;
             }
-
-            console.log('the final array is ' + res);
-            console.log('the first item is ' + res[0]);
-            console.log('----');
         }
     }
 
@@ -103,5 +101,5 @@ part1(example1);
 part1(example2);
 part1(example3);
 part1(example4);
-part1([].concat(puzzleInput), 12, 2);
-part2([].concat(puzzleInput));
+part1(puzzleInput, 12, 2);
+part2(puzzleInput);
